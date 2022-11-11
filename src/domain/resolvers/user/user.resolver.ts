@@ -1,5 +1,5 @@
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
-import { UserRepository } from "../../../infrastructure/repositories/in-memory/user/user.repository";
+import { UserRepository } from "../../../infrastructure/repositories/in-memory/user.repository";
 import { CreateUserService } from "../../../use-cases/create-user/create-user.service";
 import { CreateUserInput } from "./create-user.input";
 import { UserModel } from "./user.model";

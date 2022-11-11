@@ -3,7 +3,7 @@ import {
   CreateUser,
   IUserRepository,
   User,
-} from "./../../interfaces/user.interface";
+} from "../interfaces/user.interface";
 
 export class UserRepository implements IUserRepository {
   private users: User[] = [];

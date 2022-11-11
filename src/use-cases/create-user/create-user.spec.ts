@@ -1,4 +1,4 @@
-import { UserRepository } from "../../infrastructure/repositories/in-memory/user/user.repository";
+import { UserRepository } from "../../infrastructure/repositories/in-memory/user.repository";
 import { IUserRepository } from "./../../infrastructure/repositories/interfaces/user.interface";
 import { CreateUserService } from "./create-user.service";
 
