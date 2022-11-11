@@ -1,3 +1,4 @@
+import { schema } from "./create-user.schema";
 import { IUserRepository } from "../../infrastructure/repositories/interfaces/user.interface";
 
 type CreateUser = {
@@ -10,10 +11,11 @@ export class CreateUserService {
   constructor(private userRepository: IUserRepository) {}
 
   async handle({ name, email, password }: CreateUser) {
-    try {
-      return await this.userRepository.createUser({ name, email, password });
-    } catch (e: any) {
-      console.log(e);
-    }
+    await schema.validate({ name, email, password });
+
+    const userAlreadyExists = await this.userRepository.findUserByEmail(email);
+    if (userAlreadyExists) throw new Error("User already exists");
+
+    return await this.userRepository.createUser({ name, email, password });
   }
 }

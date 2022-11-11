@@ -22,4 +22,8 @@ export class UserRepository implements IUserRepository {
   async listUsers(): Promise<Omit<User, "password">[]> {
     return this.users;
   }
+
+  async findUserByEmail(email: string): Promise<User | undefined> {
+    return this.users.find((user) => user.email === email);
+  }
 }
