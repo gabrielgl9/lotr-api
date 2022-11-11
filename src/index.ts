@@ -1,9 +1,8 @@
 import "reflect-metadata";
-import { ApolloServer, gql } from "apollo-server";
-import { randomUUID } from "node:crypto";
+import { ApolloServer } from "apollo-server";
+import path from "node:path";
 import { buildSchema } from "type-graphql";
 import { UserResolver } from "./domain/resolvers/user/user.resolver";
-import path from "node:path";
 
 async function bootstrap() {
   const schema = await buildSchema({
