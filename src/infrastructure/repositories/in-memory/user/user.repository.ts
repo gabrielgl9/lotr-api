@@ -19,7 +19,7 @@ export class UserRepository implements IUserRepository {
     return user;
   }
 
-  async listUsers(): Promise<Omit<User, "password">[]> {
+  async listUsers(): Promise<User[]> {
     return this.users;
   }
 
