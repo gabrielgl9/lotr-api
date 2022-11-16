@@ -1,5 +1,6 @@
-import { schema } from "./create-user.schema";
+import bcrypt from "bcryptjs";
 import { IUserRepository } from "../../infrastructure/repositories/interfaces/user.interface";
+import { schema } from "./create-user.schema";
 
 type CreateUser = {
   name: string;
@@ -16,6 +17,11 @@ export class CreateUserService {
     const userAlreadyExists = await this.userRepository.findUserByEmail(email);
     if (userAlreadyExists) throw new Error("User already exists");
 
-    return await this.userRepository.createUser({ name, email, password });
+    const hashedPassword = await bcrypt.hash(password, 10);
+    return await this.userRepository.createUser({
+      name,
+      email,
+      password: hashedPassword,
+    });
   }
 }
