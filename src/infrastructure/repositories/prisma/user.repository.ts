@@ -1,4 +1,4 @@
-import { randomUUID } from "node:crypto";
+import { PrismaClient } from "@prisma/client";
 import {
   CreateUser,
   IUserRepository,
@@ -6,24 +6,27 @@ import {
 } from "../interfaces/user.interface";
 
 export class UserRepository implements IUserRepository {
-  private users: User[] = [];
+  private prisma = new PrismaClient();
 
   async createUser({ name, email, password }: CreateUser): Promise<User> {
-    const user = {
-      id: randomUUID(),
-      name,
-      email,
-      password,
-    };
-    this.users.push(user);
-    return user;
+    return await this.prisma.user.create({
+      data: {
+        name,
+        email,
+        password,
+      },
+    });
   }
 
   async listUsers(): Promise<User[]> {
-    return this.users;
+    return await this.prisma.user.findMany();
   }
 
   async findUserByEmail(email: string): Promise<User | null | undefined> {
-    return this.users.find((user) => user.email === email);
+    return await this.prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
   }
 }

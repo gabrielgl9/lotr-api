@@ -13,5 +13,5 @@ export type CreateUser = {
 export interface IUserRepository {
   createUser: ({ name, email, password }: CreateUser) => Promise<User>;
   listUsers: () => Promise<User[]>;
-  findUserByEmail: (email: string) => Promise<User | undefined>;
+  findUserByEmail: (email: string) => Promise<User | null | undefined>;
 }
