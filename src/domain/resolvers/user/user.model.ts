@@ -10,4 +10,7 @@ export class UserModel {
 
   @Field()
   email: string;
+
+  @Field({ nullable: true })
+  token: string;
 }

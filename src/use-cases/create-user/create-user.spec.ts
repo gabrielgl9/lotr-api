@@ -19,6 +19,7 @@ describe("Create User", () => {
     });
 
     expect(userCreated).toHaveProperty("id");
+    expect(userCreated).toHaveProperty("token");
   });
 
   it("it should not be able to create a new user because no email was informed", async () => {

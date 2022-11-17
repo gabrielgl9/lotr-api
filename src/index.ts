@@ -1,8 +1,11 @@
 import "reflect-metadata";
 import { ApolloServer } from "apollo-server";
+import * as dotenv from "dotenv";
 import path from "node:path";
 import { buildSchema } from "type-graphql";
 import { UserResolver } from "./domain/resolvers/user/user.resolver";
+
+dotenv.config();
 
 async function bootstrap() {
   const schema = await buildSchema({

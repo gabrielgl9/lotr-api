@@ -1,3 +1,4 @@
+import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import { IUserRepository } from "../../infrastructure/repositories/interfaces/user.interface";
 import { schema } from "./create-user.schema";
@@ -18,10 +19,20 @@ export class CreateUserService {
     if (userAlreadyExists) throw new Error("User already exists");
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    return await this.userRepository.createUser({
+    const user = await this.userRepository.createUser({
       name,
       email,
       password: hashedPassword,
     });
+
+    const token = jwt.sign(
+      { id: user.id, name: user.name, email: user.email },
+      process.env.TOKEN_KEY + "",
+      {
+        expiresIn: "2h",
+      }
+    );
+
+    return { ...user, token };
   }
 }

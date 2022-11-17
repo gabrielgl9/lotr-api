@@ -29,7 +29,14 @@ describe("List users", () => {
     const users = await listUserService.handle();
 
     expect(users).toEqual(
-      expect.arrayContaining([expect.objectContaining(newUser)])
+      expect.arrayContaining([
+        expect.objectContaining({
+          id: newUser.id,
+          name: newUser.name,
+          email: newUser.email,
+          password: newUser.password,
+        }),
+      ])
     );
   });
 });

@@ -9,11 +9,17 @@ input CreateUserInput {
   password: String!
 }
 
+input LoginInput {
+  email: String!
+  password: String!
+}
+
 type Mutation {
   createUser(data: CreateUserInput!): UserModel!
 }
 
 type Query {
+  login(data: LoginInput!): UserModel!
   users: [UserModel!]!
 }
 
@@ -21,4 +27,5 @@ type UserModel {
   email: String!
   id: String!
   name: String!
+  token: String
 }
